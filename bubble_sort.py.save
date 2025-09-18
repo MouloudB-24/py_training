@@ -1,0 +1,28 @@
+def bubble_sort1(liste):
+    liste_ordonnee = []
+    for i in range(len(liste)):
+        a = min(liste)
+        liste_ordonnee.append(a)
+        liste.remove(a)
+    return liste_ordonnee
+
+l = [40, 16, 80, 2, 90]
+    
+print("Ma solution", bubble_sort1(l))
+
+
+def bubble_sort2(liste):
+    for i in range(len(liste) - 1, 0, -1):
+        for j in range(i):
+            n_courant = liste[j]
+            n_suivant = liste[j+1]
+            if n_courant > n_suivant:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+                              
+l = [40, 16, 80, 2, 90]
+    
+print("Algorithme ", bubble_sort2(l))
+
+def function(arg1, arg2 arg3):
+	return arg1 + arg2 +  arg3
