@@ -13,7 +13,7 @@ def perform_and_show_conversion(unit1: str, unit2: str, factor: float, reverse: 
         False: user provide a value to convert
     """
     if reverse:
-        unit1, unit2, factor = unit2, unit1, round(1/factor, 3)
+        unit1, unit2, factor = unit2, unit1, 1/factor
         
     str_value = input(f"\nConversion {unit1} --> {unit2}. Enter the value in {unit1} (or 'q' to quit): ")
     if str_value == "q":
@@ -25,7 +25,7 @@ def perform_and_show_conversion(unit1: str, unit2: str, factor: float, reverse: 
         print("Error: You must enter a numeric value (use a point pfor decimals)")
         return perform_and_show_conversion(unit1, unit2, factor)
     
-    converted_value = round(float_value * factor, 3)
+    converted_value = round(float_value * factor, 2)
     print(f"Conversion result: {float_value} {unit1} = {converted_value} {unit2}\n")
     return False
 
