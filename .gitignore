@@ -9,3 +9,9 @@ wheels/
 # Virtual environments
 .venv
 data/
+venv/
+
+
+
+jonathan.py
+*.gitignore
