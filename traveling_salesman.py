@@ -45,20 +45,20 @@ def get_itineraire_greedy(cities):
         list: list of cities oredered accoding to the optima route
     """
     itineraire = []
-    i = 1
-    while not len(cities) == 1:
-        visited_city = cities.pop(0)
-        itineraire.append(visited_city)
+    unvisited_cities = set(cities)
+    current_city = cities[0]
+    next_city = ""
+    
+    while unvisited_cities:
+        itineraire.append(current_city)
+        unvisited_cities.remove(current_city)
         distance_min = float("inf")
-        next_city = ""
-        for city in cities:
-            current_distance = get_distance_between_two_cities(visited_city, city)
+        for city in unvisited_cities:
+            current_distance = get_distance_between_two_cities(current_city, city)
             if current_distance < distance_min:
                 distance_min = current_distance
                 next_city = city
-        cities.remove(next_city)
-        cities.insert(0, next_city)
-    itineraire += cities
+        current_city = next_city
     return itineraire 
 
 
@@ -78,17 +78,18 @@ def get_distance_total(itineraire):
 # Show results
 cities = load_cities("data/villes.txt")
 print(f"The number of cities is:  {len(cities)}\n")
+# print(cities[:3])
 
 paris_bordeaux = get_distance_between_two_cities(cities[0], cities[1])
 print(f"Distance between Paris and Bordeaux is: {paris_bordeaux}")
 paris_bordeaux = get_distance_between_two_cities(cities[1], cities[2])
 print(f"Distance between Bordeaux and Marseille is: {paris_bordeaux}")
 
-# Calcul l'itineraire la plus court
+# # Calcul l'itineraire la plus court
 itineraire = get_itineraire_greedy(cities)
 print(f"\nThe first 10 cities of the optimal route: \n{[city[0] for city in itineraire[:10]]}")
 
-# Distance totale :
+# # Distance totale :
 distance_tot = get_distance_total(itineraire)
 print(f"\nTotal distance of the optima; route: {distance_tot}")
 
