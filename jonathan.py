@@ -42,7 +42,38 @@ def show_person_information(name, age, size=0):
 NB_PERSONNES = 1
 
 # Sow results
-for i in range(NB_PERSONNES):
-    name = "Personne" + str(i+1)
-    age = ask_age(name)
-    show_person_information(name, age, 1.80)
+# for i in range(NB_PERSONNES):
+#     name = "Personne" + str(i+1)
+#     age = ask_age(name)
+#     show_person_information(name, age, 1.80)
+
+
+
+# Fonctions recursives
+
+def recursive_function(n, limit=10000):
+    print(n)
+    if n > limit:
+        return
+    recursive_function(n*n, limit)
+
+
+def demander_choix_utilisateur(min, max):
+    reponse_str = input(f"Quel est votre choix entre {min} et {max} : ")
+    
+    try:
+        reponse_int = int(reponse_str)
+        if not (min <= reponse_int <= max):
+            print(f"Vous devez rentrer un choix entre {min} et {max}!\n")
+            return demander_choix_utilisateur(min, max)
+        return reponse_int
+    
+    except ValueError:
+        print(f"Vous devez rentrer un nombre numérique !\n")
+        return demander_choix_utilisateur(min, max)
+
+
+choix = demander_choix_utilisateur(1, 10)
+print(choix)
+    
+    
