@@ -1,5 +1,8 @@
 # ---- Symetric Difference ----
 
+import json
+
+
 def symtric_difference(*args):
     current_diff = args[0]
     for i in range(len(args)-1):
@@ -132,4 +135,82 @@ def square_root_bisection(number: int, tolerance: float=0.01, max_iterations: in
         print(f"Failed to converge within {max_iterations} iterations")
         return None
     
-square_root_bisection(0.001, 1e-7, 50)
+# square_root_bisection(0.001, 1e-7, 50)
+
+
+obj = {
+    "organisation": "InnovTech Solutions",
+    "dernière_mise_à_jour": "2025-05-10",
+    "projets": [
+        {
+            "id": 101,
+            "nom": "IA Santé",
+            "description": "Développement d'une IA pour diagnostiquer les maladies rares.",
+            "date_début": "2024-03-01",
+            "date_fin": "",
+            "statut": "en cours",
+            "membres": [
+                {
+                    "nom": "Alice Dupont",
+                    "rôle": "Chef de projet"
+                },
+                {
+                    "nom": "Karim Bellarbi",
+                    "rôle": "Développeur IA"
+                }
+            ],
+            "technologies": [
+                "Python",
+                "TensorFlow",
+                "FastAPI"
+            ]
+        },
+        {
+            "id": 102,
+            "nom": "Plateforme Éducation",
+            "description": "Plateforme en ligne pour la formation continue des enseignants.",
+            "date_début": "2023-09-15",
+            "date_fin": "2024-06-30",
+            "statut": "terminé",
+            "membres": [
+                {
+                    "nom": "Léa Martin",
+                    "rôle": "Designer UX"
+                },
+                {
+                    "nom": "Paul Nguyen",
+                    "rôle": "Développeur Frontend"
+                }
+            ],
+            "technologies": [
+                "React",
+                "Node.js",
+                "MongoDB"
+            ]
+        }
+    ]
+}
+
+def update_json(obj: json, target_name: str, new_job: str) -> None:
+    """Algorithme intelligent pour modifier in JSON.
+    """
+    if isinstance(obj, dict):
+        print("Je traite un Dict...")
+        if obj.get("nom") == target_name:
+            if "rôle" in obj:
+                print(f"Trouvé {target_name} avec le rôle : {obj['rôle']}")
+                obj["rôle"] = new_job
+                print(f"Rôle modifié en : {new_job}")
+                return
+        
+        for value in obj.values():
+            update_json(value, target_name, new_job)
+    
+    elif isinstance(obj, list):
+        print("Je traite une List...")
+        for item in obj:
+            update_json(item, target_name, new_job)
+
+
+update_json(obj, "Alice Dupont", "Data Engineer")
+
